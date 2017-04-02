@@ -25,7 +25,7 @@ SECRET_KEY = 'n35%td)15ne@878ul85j$0pug$$1oz1(q^m_nz8=h7nzuow0+='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["gavinbravo.pythonanywhere.com"]
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
     'oauth2_provider',
+    'corsheaders'
     #'social_django',
     #'rest_framework_social_oauth2',
 
@@ -62,6 +63,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'sookhrest.urls'
@@ -133,6 +137,9 @@ USE_TZ = True
 
 
 SITE_ID = 1
+
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
