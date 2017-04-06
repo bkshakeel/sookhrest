@@ -31,7 +31,7 @@ class Mobile_sub_MobileForm(serializers.Serializer):
     title = serializers.CharField(max_length=250)
     price = serializers.IntegerField()
     description=serializers.CharField(max_length=500)
-    photo = serializers.ImageField()
+    photo = serializers.ImageField(required=False)
     name = serializers.CharField(max_length=250)
     phone_number = serializers.IntegerField()
     city = serializers.CharField(max_length=250)

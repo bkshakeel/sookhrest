@@ -19,8 +19,9 @@ from coreimpl import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls,name='admin'),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    #url(r'^rest-auth/', include('rest_auth.urls')),
+    #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r'^', include('coreimpl.urls')),
     
 ]

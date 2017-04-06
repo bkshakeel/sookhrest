@@ -25,7 +25,7 @@ SECRET_KEY = 'n35%td)15ne@878ul85j$0pug$$1oz1(q^m_nz8=h7nzuow0+='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["gavinbravo.pythonanywhere.com"]
+ALLOWED_HOSTS = ["gavinbravo.pythonanywhere.com","127.0.0.1"]
 
 
 # Application definition
@@ -156,3 +156,12 @@ MEDIA_URL = '/media/'
 #SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 #    'fields': 'id, name'
 #}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+    ),
+        'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        )
+}   
