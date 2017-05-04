@@ -25,7 +25,9 @@ SECRET_KEY = 'n35%td)15ne@878ul85j$0pug$$1oz1(q^m_nz8=h7nzuow0+='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["gavinbravo.pythonanywhere.com","127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1:3000"]
+
+
 
 
 # Application definition
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'coreimpl.apps.CoreimplConfig',
     'rest_framework.authtoken',
     'rest_auth',
@@ -49,11 +52,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
     'oauth2_provider',
-    'corsheaders'
+    
     #'social_django',
     #'rest_framework_social_oauth2',
 
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+
     
 ]
 

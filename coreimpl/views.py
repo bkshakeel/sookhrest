@@ -29,7 +29,7 @@ class Mobile_sub_MobileFormList(generics.ListCreateAPIView):
     serializer_class = Mobile_sub_MobileForm
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
 class Mobile_sub_tablets_formList(generics.ListCreateAPIView):
     queryset = Tablets_sub_category.objects.all()
