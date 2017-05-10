@@ -24,13 +24,13 @@ class UserSerializer(serializers.Serializer):
     password=serializers.CharField(max_length=250)
     email=serializers.EmailField(allow_blank=False)
 
-   def create(self, validated_data):
+"""   def create(self, validated_data):
         print("in create")
         user = User(email=validated_data['email'], username=validated_data['username'])
         user.set_password(validated_data['password'])
         user.save()
         print("user saved")
-        return user
+        return user"""
 
 
 class Mobile_sub_MobileForm(serializers.Serializer):
