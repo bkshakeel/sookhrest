@@ -17,7 +17,7 @@ from rest_auth.registration.views import SocialLoginView
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
 
-    
+
 class TwitterLogin(LoginView):
     serializer_class = TwitterLoginSerializer
     adapter_class = TwitterOAuthAdapter
@@ -28,7 +28,7 @@ class Mobile_sub_MobileFormList(generics.ListCreateAPIView):
     queryset = Mobiles_sub_category.objects.all()
     serializer_class = Mobile_sub_MobileForm
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
     permission_classes = (permissions.AllowAny,)
 
 class Mobile_sub_tablets_formList(generics.ListCreateAPIView):
@@ -143,7 +143,7 @@ class Furniture_FormList(generics.ListCreateAPIView):
     serializer_class = Furniture_Form
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
 
 
@@ -253,13 +253,15 @@ class Spare_parts_bikes_sub_category_formDetail(generics.RetrieveUpdateDestroyAP
 class Furniture_FormDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Furniture.objects.all()
     serializer_class = Furniture_Form
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                      IsOwnerOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+    permission_classes = (permissions.AllowAny,)
 
 
 class UserDetail(generics.RetrieveAPIView):

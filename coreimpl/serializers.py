@@ -24,7 +24,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'Mobiles_sub_category','Tablets_sub_category','Accessories_sub_category','Computer_sub_category','Tv_video_sub_category','Camera_sub_category','Games_sub_category','Fridge_ac_washingmachine','Kitchen_other','Cars_sub_category','Commercial_vehicle_sub_category',
 'Other_vehicles_sub_category','Spare_parts_cars_sub_category','Motorcycles_sub_category','Bicycles_sub_category','Spare_parts_bikes_sub_category','Furniture')
-
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return User.objects.create(**validated_data)
 class Mobile_sub_MobileForm(serializers.Serializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     id = serializers.IntegerField(read_only=True)
@@ -57,13 +61,13 @@ class Mobile_sub_MobileForm(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
-        instance.mobile_brand_name = validated_data.get('mobile_brand_name', instance.mobile_brand_name) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.mobile_brand_name = validated_data.get('mobile_brand_name', instance.mobile_brand_name)
         instance.city = validated_data.get('city', instance.city)
 
         instance.save()
         return instance
-    
+
     class Meta:
         fields = ('owner',)
 
@@ -80,7 +84,7 @@ class Mobile_sub_tablets_form(serializers.Serializer):
     tablet_brand_name= serializers.CharField(max_length=250)
     categories=serializers.ChoiceField(choices=(('mobiles','mobiles'),('electronics','electronics'),('cars','cars'),('bikes','bikes'),('furniture','furniture')))
     subcategories=serializers.ChoiceField(choices=(('mobiles','mobiles'),('tablets','tablets'),('accessories','accessories')))
-    
+
     def create(self, validated_data):
         """
         Create and return a new `Snippet` instance, given the validated data.
@@ -99,15 +103,15 @@ class Mobile_sub_tablets_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
-        instance.tablet_brand_name = validated_data.get('tablet_brand_name', instance.tablet_brand_name) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.tablet_brand_name = validated_data.get('tablet_brand_name', instance.tablet_brand_name)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
         return instance
 
     class Meta:
         fields = ('owner',)
-    
+
 class Mobile_sub_accessories_form(serializers.Serializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     id = serializers.IntegerField(read_only=True)
@@ -141,8 +145,8 @@ class Mobile_sub_accessories_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
-        instance.mobile_accessory_choice = validated_data.get('mobile_accessory_choice', instance.mobile_accessory_choice) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.mobile_accessory_choice = validated_data.get('mobile_accessory_choice', instance.mobile_accessory_choice)
         instance.accessory_brand_name = validated_data.get('accessory_brand_name', instance.accessory_brand_name)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -150,7 +154,7 @@ class Mobile_sub_accessories_form(serializers.Serializer):
 
     class Meta:
         fields = ('owner',)
-    
+
 
 
 class Computer_sub_category_form(serializers.Serializer):
@@ -186,7 +190,7 @@ class Computer_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.computer_item_sub_category = validated_data.get('computer_item_sub_category', instance.computer_item_sub_category)
         instance.computer_brand_name = validated_data.get('computer_brand_name', instance.computer_brand_name)
         instance.city = validated_data.get('city', instance.city)
@@ -211,7 +215,7 @@ class Tv_video_sub_category_form(serializers.Serializer):
     subcategories=serializers.ChoiceField(choices=(('computer','computer'),('tvvideo','tvvideo'),('camera','camera'),('games','games'),('fridge','fridge'),('kitchen','kitchen')))
     def create(self, validated_data):
         return Tv_video_sub_category.objects.create(**validated_data)
-        
+
     def update(self, instance, validated_data):
         """
         Update and return an existing `Snippet` instance, given the validated data.
@@ -224,7 +228,7 @@ class Tv_video_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.tv_video_sub_category = validated_data.get('tv_video_sub_category', instance.tv_video_sub_category)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -232,7 +236,7 @@ class Tv_video_sub_category_form(serializers.Serializer):
 
     class Meta:
         fields = ('owner',)
-   
+
 
 
 class Camera_sub_category_form(serializers.Serializer):
@@ -267,7 +271,7 @@ class Camera_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.camera_item_sub_category = validated_data.get('camera_item_sub_category', instance.camera_item_sub_category)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -311,7 +315,7 @@ class Games_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.Games_item_sub_category = validated_data.get('Games_item_sub_category', instance.Games_item_sub_category)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -353,7 +357,7 @@ class Fridge_ac_washingmachine_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.Fridge_ac_washingmachine_sub_category = validated_data.get('Fridge_ac_washingmachine_sub_category', instance.Fridge_ac_washingmachine_sub_category)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -394,7 +398,7 @@ class Kitchen_other_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.Kitchen_other_sub_category = validated_data.get('Kitchen_other_sub_category', instance.Kitchen_other_sub_category)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -440,7 +444,7 @@ class Cars_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.kilometers_driven = validated_data.get('kilometers_driven', instance.phonkilometers_drivene_number)
         instance.year_manufacture = validated_data.get('year_manufacture', instance.year_manufacture)
         instance.fuel = validated_data.get('fuel', instance.fuel)
@@ -489,7 +493,7 @@ class Commercial_vehicle_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.kilometers_driven = validated_data.get('kilometers_driven', instance.phonkilometers_drivene_number)
         instance.year_manufacture = validated_data.get('year_manufacture', instance.year_manufacture)
         instance.fuel = validated_data.get('fuel', instance.fuel)
@@ -536,7 +540,7 @@ class Other_vehicles_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.kilometers_driven = validated_data.get('kilometers_driven', instance.phonkilometers_drivene_number)
         instance.year_manufacture = validated_data.get('year_manufacture', instance.year_manufacture)
         instance.fuel = validated_data.get('fuel', instance.fuel)
@@ -625,7 +629,7 @@ class Motorcycles_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.motorcycle_brand_name = validated_data.get('motorcycle_brand_name', instance.motorcycle_brand_name)
         instance.bikes_model = validated_data.get('phone_number', instance.phone_number)
         instance.kilometers_driven = validated_data.get('kilometers_driven', instance.phonkilometers_drivene_number)
@@ -652,7 +656,7 @@ class Bicycles_sub_category_form(serializers.Serializer):
     bicycle_brand_name = serializers.CharField(max_length=250)
     categories=serializers.ChoiceField(choices=(('mobiles','mobiles'),('electronics','electronics'),('cars','cars'),('bikes','bikes'),('furniture','furniture')))
     subcategories=serializers.ChoiceField(choices=(('motorcycle','motorcycle'),('bicycle','bicycle'),('spare_bikes','spare_bikes')))
-    
+
     def create(self, validated_data):
         """
         Create and return a new `Snippet` instance, given the validated data.
@@ -671,7 +675,7 @@ class Bicycles_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.bicycle_brand_name = validated_data.get('bicycle_brand_name', instance.bicycle_brand_name)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -712,7 +716,7 @@ class Spare_parts_bikes_sub_category_form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.spare_bikes_name = validated_data.get('spare_bikes_name', instance.spare_bikes_name)
         instance.city = validated_data.get('city', instance.city)
         instance.save()
@@ -723,12 +727,12 @@ class Spare_parts_bikes_sub_category_form(serializers.Serializer):
 
 
 class Furniture_Form(serializers.Serializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.username',default=User.objects.get(id=1))
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(max_length=250)
     price = serializers.IntegerField()
     description=serializers.CharField(max_length=500)
-    photo = serializers.ImageField()
+    photo = serializers.ImageField(required=True)
     name = serializers.CharField(max_length=250)
     phone_number = serializers.IntegerField()
     city = serializers.CharField(max_length=250)
@@ -754,7 +758,7 @@ class Furniture_Form(serializers.Serializer):
         instance.name = validated_data.get('name', instance.name)
         instance.categories = validated_data.get('categories', instance.categories)
         instance.subcategories = validated_data.get('subcategories', instance.subcategories)
-        instance.phone_number = validated_data.get('phone_number', instance.phone_number) 
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.furniture_type = validated_data.get('furniture_type', instance.furniture_type)
         instance.city = validated_data.get('city', instance.city)
         instance.save()

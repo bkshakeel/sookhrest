@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 #modile category section
@@ -13,7 +14,7 @@ class Mobiles(models.Model):
     city = models.CharField(max_length=250)
     subcategories = models.CharField(max_length=250,default='mobiles')
     categories = models.CharField(max_length=250,default='mobiles')
-    created_time=models.DateTimeField(default=timezone.now)   
+    created_time=models.DateTimeField(default=timezone.now)
 
     class  Meta:
         abstract = True
@@ -45,7 +46,7 @@ class Electronics(models.Model):
     city = models.CharField(max_length=250)
     subcategories = models.CharField(max_length=250,default='computer')
     categories = models.CharField(max_length=250,default='electronics')
-    created_time=models.DateTimeField(default=timezone.now) 
+    created_time=models.DateTimeField(default=timezone.now)
 
     class  Meta:
         abstract = True
@@ -120,7 +121,7 @@ class Other_vehicles_sub_category(Cars):
     Other_vehicles_brand_name = models.CharField(max_length=250)
     kilometers_driven = models.IntegerField()
     year_manufacture = models.IntegerField()
-    fuel = models.CharField(max_length=250)    
+    fuel = models.CharField(max_length=250)
 
 class Spare_parts_cars_sub_category(Cars):
     owner = models.ForeignKey('auth.User', related_name='Spare_parts_cars_sub_category', on_delete=models.CASCADE)
@@ -137,7 +138,7 @@ class Bikes(models.Model):
     city = models.CharField(max_length=250)
     subcategories = models.CharField(max_length=250,default='bikes')
     categories = models.CharField(max_length=250,default='motorcycle')
-    created_time=models.DateTimeField(default=timezone.now) 
+    created_time=models.DateTimeField(default=timezone.now)
 
     class  Meta:
         abstract = True
@@ -151,7 +152,7 @@ class Motorcycles_sub_category(Bikes):
     kilometers_driven = models.IntegerField()
     year_manufacture = models.IntegerField()
     fuel = models.CharField(max_length=250)
-    
+
 
 class Bicycles_sub_category(Bikes):
     owner = models.ForeignKey('auth.User', related_name='Bicycles_sub_category', on_delete=models.CASCADE)
