@@ -25,7 +25,11 @@ SECRET_KEY = 'n35%td)15ne@878ul85j$0pug$$1oz1(q^m_nz8=h7nzuow0+='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ["gavinbravo.pythonanywhere.com/o/token/","gavinbravo.pythonanywhere.com","localhost:3000","localhost:3001","127.0.0.1:3000","127.0.0.1:3001","192.168.2.15:3001","192.168.2.15:3000"]
+
+
+
 
 
 

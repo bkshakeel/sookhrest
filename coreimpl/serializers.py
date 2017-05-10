@@ -2,7 +2,7 @@ from rest_framework import serializers
 from coreimpl.models import Accessories_sub_category ,Electronics,Fridge_ac_washingmachine,Furniture,Games_sub_category,Kitchen_other,Mobiles,Mobiles_sub_category,Motorcycles_sub_category,Other_vehicles_sub_category,Spare_parts_bikes_sub_category,Spare_parts_bikes_sub_category,Spare_parts_cars_sub_category,Tablets_sub_category,Bicycles_sub_category,Electronics,Fridge_ac_washingmachine,Bikes,Camera_sub_category,Cars,Cars_sub_category,Cars_sub_category,Commercial_vehicle_sub_category,Computer_sub_category,Tv_video_sub_category
 from django.contrib.auth.models import User
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.Serializer):
     Mobiles_sub_category = serializers.PrimaryKeyRelatedField(many=True, queryset=Mobiles_sub_category.objects.all())
     Tablets_sub_category= serializers.PrimaryKeyRelatedField(many=True, queryset=Tablets_sub_category.objects.all())
     Accessories_sub_category= serializers.PrimaryKeyRelatedField(many=True, queryset=Accessories_sub_category.objects.all())
@@ -20,15 +20,19 @@ class UserSerializer(serializers.ModelSerializer):
     Bicycles_sub_category= serializers.PrimaryKeyRelatedField(many=True, queryset=Bicycles_sub_category.objects.all())
     Spare_parts_bikes_sub_category= serializers.PrimaryKeyRelatedField(many=True, queryset=Spare_parts_bikes_sub_category.objects.all())
     Furniture= serializers.PrimaryKeyRelatedField(many=True, queryset=Furniture.objects.all())
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'Mobiles_sub_category','Tablets_sub_category','Accessories_sub_category','Computer_sub_category','Tv_video_sub_category','Camera_sub_category','Games_sub_category','Fridge_ac_washingmachine','Kitchen_other','Cars_sub_category','Commercial_vehicle_sub_category',
-'Other_vehicles_sub_category','Spare_parts_cars_sub_category','Motorcycles_sub_category','Bicycles_sub_category','Spare_parts_bikes_sub_category','Furniture')
-    def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
-        return User.objects.create(**validated_data)
+    username=serializers.CharField(max_length=250)
+    password=serializers.CharField(max_length=250)
+    email=serializers.EmailField(allow_blank=False)
+
+   def create(self, validated_data):
+        print("in create")
+        user = User(email=validated_data['email'], username=validated_data['username'])
+        user.set_password(validated_data['password'])
+        user.save()
+        print("user saved")
+        return user
+
+
 class Mobile_sub_MobileForm(serializers.Serializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     id = serializers.IntegerField(read_only=True)

@@ -14,6 +14,11 @@ from rest_auth.social_serializers import TwitterLoginSerializer
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
 
@@ -256,13 +261,27 @@ class Furniture_FormDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.AllowAny,)
 
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-    permission_classes = (permissions.AllowAny,)
+class UserList(APIView):
 
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request, format=None):
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        print("request",request.data)
+        serializer = UserSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            print(serializer.validated_data)
+            t=serializer.validated_data
+            print(t["username"])
+            print("in post")
+            User.objects.create_user(t["username"],t["email"],t["password"])
+           # serializer.save()
+            return Response("created", status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
